@@ -3,6 +3,8 @@
 @theme {
   /* NYSERDA / New York State Design System */
   --font-sans: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  /* Uses --font-roboto from next/font (set on html in layout.tsx) */
+  --font-roboto: var(--font-roboto), ui-sans-serif, sans-serif;
 
   /* Primary palette */
   --color-primary: #154973;
