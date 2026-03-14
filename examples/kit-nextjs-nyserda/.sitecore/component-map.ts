@@ -15,6 +15,7 @@ import * as AndrewHeaderContent from 'src/components/page-content/AndrewHeaderCo
 import * as Navigation from 'src/components/navigation/Navigation';
 import * as LinkList from 'src/components/link-list/LinkList';
 import * as Image from 'src/components/image/Image';
+import * as HomeCTA from 'src/components/home-cta/HomeCTA';
 import * as StaticCarousel from 'src/components/content-carousel/StaticCarousel';
 import * as StaticCarouselbackup from 'src/components/content-carousel/StaticCarousel-backup';
 import * as ContentCarousel from 'src/components/content-carousel/ContentCarousel';
@@ -37,6 +38,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['Navigation', { ...Navigation, componentType: 'client' }],
   ['LinkList', { ...LinkList }],
   ['Image', { ...Image }],
+  ['HomeCTA', { ...HomeCTA, componentType: 'client' }],
   ['StaticCarousel', { ...StaticCarousel, componentType: 'client' }],
   ['StaticCarousel-backup', { ...StaticCarouselbackup, componentType: 'client' }],
   ['ContentCarousel', { ...ContentCarousel, componentType: 'client' }],

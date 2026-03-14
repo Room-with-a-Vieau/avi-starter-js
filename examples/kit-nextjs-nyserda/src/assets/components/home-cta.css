@@ -1,0 +1,116 @@
+/* Home CTA – hero section matching www.nyserda.ny.gov home hero */
+
+.hero-enhanced {
+  @apply w-full;
+}
+
+.hero-block {
+  @apply relative w-full overflow-hidden;
+}
+
+.hero-block__img {
+  @apply w-full h-auto block object-cover;
+  min-height: 280px;
+}
+
+@media (min-width: 1024px) {
+  .hero-block__img {
+    min-height: 400px;
+    max-height: 70vh;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* Desktop: show only desktop image */
+.desktop-only {
+  @apply hidden;
+}
+@media (min-width: 768px) {
+  .desktop-only {
+    @apply block;
+  }
+  .mobile-only {
+    @apply hidden;
+  }
+}
+
+/* Mobile: show only mobile image */
+.mobile-only {
+  @apply block;
+}
+@media (min-width: 768px) {
+  .mobile-only {
+    @apply hidden;
+  }
+}
+
+.no-stack-image-mobile .hero-block__img {
+  @apply w-full;
+}
+
+/* Overlay content */
+.hero-content {
+  @apply absolute inset-x-0 bottom-0 p-6 pt-12;
+  background: linear-gradient(
+    to top,
+    rgba(14, 50, 79, 0.95) 0%,
+    rgba(14, 50, 79, 0.7) 40%,
+    transparent 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    @apply p-8 pb-10;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-content {
+    @apply p-10 pb-12 max-w-4xl;
+  }
+}
+
+.hero-title {
+  @apply mb-4;
+}
+
+.hero-title__heading {
+  @apply m-0 text-white text-xl font-bold leading-tight;
+  font-family: var(--font-sans), 'Segoe UI', system-ui, sans-serif;
+}
+
+@media (min-width: 768px) {
+  .hero-title__heading {
+    @apply text-2xl;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-title__heading {
+    @apply text-3xl;
+  }
+}
+
+.link-panel {
+  @apply mt-2;
+}
+
+.hero-cta-button {
+  @apply inline-block py-3 px-5 text-center font-bold text-sm no-underline rounded transition-colors;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  border: 1px solid var(--color-primary);
+}
+
+.hero-cta-button:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: var(--color-text-white);
+}
+
+.hero-cta-button:focus {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
