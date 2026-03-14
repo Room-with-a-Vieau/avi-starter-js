@@ -103,3 +103,44 @@ export const WithText = (props: PromoProps): JSX.Element => {
 
   return <PromoContent {...props} renderText={renderText} />;
 };
+
+/**
+ * NYSERDA CTA variant: full-card link with image and overlay title (impact style).
+ * Matches www.nyserda.ny.gov CTA pattern: link wrapping impact-text (h4) + image.
+ */
+export const NyserdaCta = (props: PromoProps): JSX.Element => {
+  const { fields, params } = props;
+  const { styles, RenderingIdentifier: id } = params;
+
+  if (!fields) {
+    return (
+      <article className={`component promo nyserda-cta ${styles}`} id={id}>
+        <div className="component-content">
+          <span className="is-empty-hint">Promo</span>
+        </div>
+      </article>
+    );
+  }
+
+  const { PromoLink, PromoText, PromoIcon } = fields;
+
+  return (
+    <article
+      className={`component promo nyserda-cta ${styles}`}
+      id={id}
+      itemScope
+      itemType="https://schema.org/Product"
+    >
+      <div className="component-content nyserda-cta__inner">
+        <ContentSdkLink field={PromoLink} className="nyserda-cta__link">
+          <div className="impact-text" role="heading" aria-level={4}>
+            <ContentSdkRichText field={PromoText} />
+          </div>
+          <figure className="field-promoicon nyserda-cta__image" itemProp="image">
+            <ContentSdkImage field={PromoIcon} />
+          </figure>
+        </ContentSdkLink>
+      </div>
+    </article>
+  );
+};

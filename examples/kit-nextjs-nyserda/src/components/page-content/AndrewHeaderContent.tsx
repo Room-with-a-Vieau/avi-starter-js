@@ -479,7 +479,7 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-export type HeaderContentProps = ComponentProps & {
+export type AndrewHeaderContentProps = ComponentProps & {
   params?: ComponentProps['params'] & { styles?: string };
   fields?: Record<string, unknown>;
 };
@@ -501,7 +501,7 @@ function NavDropdownPanel({
       aria-labelledby={item.id}
     >
       <div className="menu-title border-b border-[var(--color-theme-weak)] bg-[var(--color-primary)] px-6 py-3">
-        <h2 className="m-0 text-lg font-semibold text-white">{item.title}</h2>
+        <h2 className="m-0 text-white">{item.title}</h2>
       </div>
       <div
         className="menu-backer min-h-[320px] bg-cover bg-center bg-no-repeat"
@@ -516,7 +516,7 @@ function NavDropdownPanel({
               <li key={col.headingId} className="menu-box list-none">
                 <h3
                   id={col.headingId}
-                  className="mb-2 text-sm font-semibold uppercase tracking-wide text-[var(--color-primary)]"
+                  className="mb-2 uppercase tracking-wide text-[var(--color-primary)]"
                 >
                   {col.heading}
                 </h3>
@@ -546,7 +546,7 @@ function NavDropdownPanel({
   );
 }
 
-export function Default({ params, page }: HeaderContentProps): React.ReactElement {
+export function Default({ params, page }: AndrewHeaderContentProps): React.ReactElement {
   const { page: _page } = useSitecore();
   const pageContext = _page ?? page;
   const isEditing = pageContext?.mode?.isEditing ?? false;
@@ -606,54 +606,57 @@ export function Default({ params, page }: HeaderContentProps): React.ReactElemen
     <div
       ref={navRef}
       className={cn(
-        'header-grid menu-wrapper-no-height relative hidden md:block',
+        'header-grid menu-wrapper-no-height relative hidden md:block w-full',
         styles
       )}
       id={id}
     >
-      <div className="container-fluid menu-max menu-wide w-full max-w-[100%] px-4">
-        <nav
-          className="nys-global-header horizontal unstacked no-border-bottom flex flex-wrap items-center border-b-0 bg-[var(--color-primary)] text-white"
-          aria-label="navigation-primary"
-        >
-          <h1 className="nyserdalogo my-0 flex-shrink-0 py-4 pr-6 text-xl font-bold" tabIndex={-1}>
-            <a
-              href={BASE_URL}
-              className="text-white no-underline hover:underline focus:outline focus:ring-2 focus:ring-white"
-            >
-              NYSERDA
-            </a>
-          </h1>
-          <ul className="nav-container flex list-none flex-wrap gap-0 pl-0">
-            {NAV_ITEMS.map((item, index) => (
-              <li
-                key={item.id}
-                className="relative"
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
+      {/* Full-bleed blue bar: extends to viewport edges with no white space on sides */}
+      <div className="relative left-1/2 w-screen -translate-x-1/2 bg-[var(--color-primary)]">
+        <div className="container-fluid menu-max menu-wide mx-auto w-full max-w-[100%] px-4">
+          <nav
+            className="nys-global-header horizontal unstacked no-border-bottom flex flex-nowrap items-stretch border-b-0 text-white"
+            aria-label="navigation-primary"
+          >
+            <h1 className="nyserdalogo my-0 flex-shrink-0 py-4 pr-6 text-white" tabIndex={-1}>
+              <a
+                href={BASE_URL}
+                style={{ color: 'white' }}
+                className="text-white no-underline hover:text-white focus:text-white visited:text-white focus:outline focus:ring-2 focus:ring-white"
               >
-                <button
-                  id={item.id}
-                  type="button"
-                  aria-expanded={openIndex === index}
-                  aria-haspopup="true"
-                  aria-controls={item.panelId}
-                  className={cn(
-                    'nav-item nav-item__header menu-button flex cursor-pointer items-center border-0 bg-transparent px-4 py-4 text-left text-sm font-semibold text-white hover:bg-[var(--color-primary-hover)] focus:outline focus:ring-2 focus:ring-inset focus:ring-white',
-                    openIndex === index && 'bg-[var(--color-primary-hover)]'
-                  )}
-                  onClick={() => {
-                    if (isEditing) return;
-                    setOpenIndex(openIndex === index ? null : index);
-                  }}
+                NYSERDA
+              </a>
+            </h1>
+            <ul className="nav-container flex min-w-0 flex-1 flex-nowrap list-none gap-0 pl-0">
+              {NAV_ITEMS.map((item, index) => (
+                <li
+                  key={item.id}
+                  className="relative min-w-0 flex-shrink"
+                  onMouseEnter={isEditing ? undefined : () => handleMouseEnter(index)}
+                  onMouseLeave={isEditing ? undefined : handleMouseLeave}
                 >
+                  <button
+                    id={item.id}
+                    type="button"
+                    aria-expanded={openIndex === index}
+                    aria-haspopup="true"
+                    aria-controls={item.panelId}
+                    className={cn(
+                      'nav-item nav-item__header menu-button flex h-full min-w-0 cursor-pointer items-center justify-center border-0 bg-transparent px-3 py-4 text-center text-white hover:bg-[var(--color-primary-hover)] focus:outline focus:ring-2 focus:ring-inset focus:ring-white',
+                      openIndex === index && 'bg-[var(--color-primary-hover)]'
+                    )}
+                    onClick={() => {
+                      if (isEditing) return;
+                      setOpenIndex(openIndex === index ? null : index);
+                    }}
+                  >
                   {item.labelHtml ? (
                     <span
-                      className="nav-span"
+                      className="nav-span block min-w-0 whitespace-normal"
                       dangerouslySetInnerHTML={{ __html: item.labelHtml }}
                     />
                   ) : (
-                    <span className="nav-span">{item.label}</span>
+                    <span className="nav-span block min-w-0 whitespace-normal">{item.label}</span>
                   )}
                 </button>
               </li>
@@ -666,6 +669,7 @@ export function Default({ params, page }: HeaderContentProps): React.ReactElemen
             <NavDropdownPanel item={openItem} isOpen />
           </div>
         )}
+        </div>
       </div>
     </div>
   );

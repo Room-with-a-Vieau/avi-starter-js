@@ -11,9 +11,12 @@ import * as RichText from 'src/components/rich-text/RichText';
 import * as Promo from 'src/components/promo/Promo';
 import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-dynamic-placeholder/PartialDesignDynamicPlaceholder';
 import * as PageContent from 'src/components/page-content/PageContent';
+import * as AndrewHeaderContent from 'src/components/page-content/AndrewHeaderContent';
 import * as Navigation from 'src/components/navigation/Navigation';
 import * as LinkList from 'src/components/link-list/LinkList';
 import * as Image from 'src/components/image/Image';
+import * as StaticCarousel from 'src/components/content-carousel/StaticCarousel';
+import * as StaticCarouselbackup from 'src/components/content-carousel/StaticCarousel-backup';
 import * as ContentCarousel from 'src/components/content-carousel/ContentCarousel';
 import * as ContentBlock from 'src/components/content-block/ContentBlock';
 import * as Container from 'src/components/container/Container';
@@ -30,9 +33,12 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['Promo', { ...Promo }],
   ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
   ['PageContent', { ...PageContent }],
+  ['AndrewHeaderContent', { ...AndrewHeaderContent, componentType: 'client' }],
   ['Navigation', { ...Navigation, componentType: 'client' }],
   ['LinkList', { ...LinkList }],
   ['Image', { ...Image }],
+  ['StaticCarousel', { ...StaticCarousel, componentType: 'client' }],
+  ['StaticCarousel-backup', { ...StaticCarouselbackup, componentType: 'client' }],
   ['ContentCarousel', { ...ContentCarousel, componentType: 'client' }],
   ['ContentBlock', { ...ContentBlock }],
   ['Container', { ...Container }],

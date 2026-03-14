@@ -1,5 +1,35 @@
 /* component promo */
 
+/* NYSERDA CTA variant: full-card link, image with overlay title (impact style) */
+.promo.nyserda-cta {
+  @apply p-5;
+
+  > .component-content.nyserda-cta__inner {
+    @apply border-0 p-0;
+  }
+
+  .nyserda-cta__link {
+    @apply block no-underline text-inherit overflow-hidden;
+  }
+
+  .impact-text {
+    @apply absolute bottom-0 left-0 right-0 p-4 text-white bg-black/50 text-lg font-semibold;
+  }
+
+  .nyserda-cta__image,
+  .field-promoicon.nyserda-cta__image {
+    @apply block w-full overflow-hidden m-0;
+
+    img {
+      @apply w-full h-auto block;
+    }
+  }
+
+  .nyserda-cta__link {
+    @apply relative;
+  }
+}
+
 .promo {
   @apply bg-bg-basic-color p-[15px] overflow-hidden box-border;
 
