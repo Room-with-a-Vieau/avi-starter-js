@@ -26,8 +26,6 @@ interface NavItem {
   labelHtml?: string;
   panelId: string;
   title: string;
-  backerStyle?: React.CSSProperties;
-  gridStyle?: React.CSSProperties;
   columns: MenuColumn[];
 }
 
@@ -37,9 +35,6 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Buildings & Businesses',
     panelId: 'ulNavItemList0',
     title: 'Buildings & Businesses',
-    backerStyle: {
-      backgroundImage: "url('https://www.nyserda.ny.gov/-/media/Project/Nyserda/Images/Navigation/Nav-Buildings-Business-1000x720.jpg')",
-    },
     columns: [
       {
         heading: 'Evaluate & Manage Your Energy Use',
@@ -124,12 +119,6 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Houses & Apartments',
     panelId: 'ulNavItemList1',
     title: 'Houses & Apartments',
-    backerStyle: {
-      backgroundImage: "url('https://www.nyserda.ny.gov/-/media/Project/Nyserda/Images/Navigation/Nav-Houses-Apartments-Neighbor-1000x720.jpg')",
-      backgroundPosition: 'bottom center',
-      backgroundSize: 'cover',
-    },
-    gridStyle: { backgroundColor: 'rgba(255,255,255,0.93)' },
     columns: [
       {
         heading: "Lower Your Home's Carbon Footprint",
@@ -210,10 +199,6 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Renewables & Transportation',
     panelId: 'ulNavItemList2',
     title: 'Renewables & Transportation',
-    backerStyle: {
-      backgroundImage: "url('https://www.nyserda.ny.gov/-/media/Project/Nyserda/Images/Navigation/Nav-Renewables-Trans-1000x720.jpg')",
-    },
-    gridStyle: { backgroundColor: 'rgba(255,255,255,0.80)' },
     columns: [
       {
         heading: 'Renewables',
@@ -282,9 +267,6 @@ const NAV_ITEMS: NavItem[] = [
     label: 'Green Careers & Training',
     panelId: 'ulNavItemList3',
     title: 'Green Careers & Training',
-    backerStyle: {
-      backgroundImage: "url('https://www.nyserda.ny.gov/-/media/Project/Nyserda/Images/Navigation/Nav-Green-Careers-1000x720.jpg')",
-    },
     columns: [
       {
         heading: 'Clean Energy Careers',
@@ -348,9 +330,6 @@ const NAV_ITEMS: NavItem[] = [
     label: 'State Policy & Community Solutions',
     panelId: 'ulNavItemList4',
     title: 'State Policy & Community Solutions',
-    backerStyle: {
-      backgroundImage: "url('https://www.nyserda.ny.gov/-/media/Project/Nyserda/Images/Navigation/Nav-State-Policy-Community-Sol-1000x720.jpg')",
-    },
     columns: [
       {
         heading: 'New York Energy Planning',
@@ -418,10 +397,6 @@ const NAV_ITEMS: NavItem[] = [
     labelHtml: 'Economic Development <br aria-hidden="true">& Innovation',
     panelId: 'ulNavItemList5',
     title: 'Economic Development & Innovation',
-    backerStyle: {
-      backgroundImage: "url('https://www.nyserda.ny.gov/-/media/Project/Nyserda/Images/Navigation/Nav-Climate-Tech-Innovation-1000x550.jpg')",
-    },
-    gridStyle: { backgroundColor: 'rgba(255,255,255,0.90)' },
     columns: [
       {
         heading: 'Investment in Clean Energy',
@@ -496,22 +471,13 @@ function NavDropdownPanel({
   return (
     <div
       id={item.panelId}
-      className="nav-item-list relative z-50 mt-0 w-full border-t border-[var(--color-theme-weak)] bg-[var(--color-theme-faint)] shadow-lg"
+      className="nav-item-list relative z-[110] mt-0 w-full border-t border-[var(--color-theme-weak)] bg-[#f0f4f8] shadow-lg"
       role="region"
       aria-labelledby={item.id}
     >
-      <div className="menu-title border-b border-[var(--color-theme-weak)] bg-[var(--color-primary)] px-6 py-3">
-        <h2 className="m-0 text-white">{item.title}</h2>
-      </div>
-      <div
-        className="menu-backer min-h-[320px] bg-cover bg-center bg-no-repeat"
-        style={item.backerStyle}
-      >
-        <div
-          className="menu-grid mx-auto max-w-[1400px] px-4 py-6"
-          style={item.gridStyle}
-        >
-          <ul className="menu-grid-inner grid grid-cols-2 gap-x-8 gap-y-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="menu-backer min-h-[320px] bg-[#f0f4f8]">
+        <div className="menu-grid mx-auto max-w-[1400px] px-4 py-6">
+          <ul className="menu-grid-inner grid grid-cols-2 gap-x-8 gap-y-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 justify-items-center text-center">
             {item.columns.map((col) => (
               <li key={col.headingId} className="menu-box list-none">
                 <h3
@@ -551,6 +517,7 @@ export function Default({ params, page }: AndrewHeaderContentProps): React.React
   const pageContext = _page ?? page;
   const isEditing = pageContext?.mode?.isEditing ?? false;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const rolloverEnabled = !isEditing;
   const [hoverTimer, setHoverTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -583,6 +550,17 @@ export function Default({ params, page }: AndrewHeaderContentProps): React.React
     setHoverTimer(t);
   }, [closePanel, hoverTimer]);
 
+  const cancelCloseTimer = useCallback(() => {
+    if (hoverTimer) {
+      clearTimeout(hoverTimer);
+      setHoverTimer(null);
+    }
+  }, [hoverTimer]);
+
+  useEffect(() => {
+    if (isEditing) setOpenIndex(null);
+  }, [isEditing]);
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closePanel();
@@ -606,7 +584,7 @@ export function Default({ params, page }: AndrewHeaderContentProps): React.React
     <div
       ref={navRef}
       className={cn(
-        'header-grid menu-wrapper-no-height relative hidden md:block w-full',
+        'header-grid menu-wrapper-no-height relative z-[100] hidden md:block w-full',
         styles
       )}
       id={id}
@@ -615,7 +593,7 @@ export function Default({ params, page }: AndrewHeaderContentProps): React.React
       <div className="relative left-1/2 w-screen -translate-x-1/2 bg-[var(--color-primary)]">
         <div className="container-fluid menu-max menu-wide mx-auto w-full max-w-[100%] px-4">
           <nav
-            className="nys-global-header horizontal unstacked no-border-bottom flex flex-nowrap items-stretch border-b-0 text-white"
+            className="nys-global-header horizontal unstacked no-border-bottom flex flex-nowrap items-stretch justify-center border-b-0 text-white"
             aria-label="navigation-primary"
           >
             <h1 className="nyserdalogo my-0 flex-shrink-0 py-4 pr-6 text-white" tabIndex={-1}>
@@ -627,26 +605,26 @@ export function Default({ params, page }: AndrewHeaderContentProps): React.React
                 NYSERDA
               </a>
             </h1>
-            <ul className="nav-container flex min-w-0 flex-1 flex-nowrap list-none gap-0 pl-0">
+            <ul className="nav-container flex min-w-0 flex-shrink-0 flex-nowrap list-none gap-0 pl-0">
               {NAV_ITEMS.map((item, index) => (
                 <li
                   key={item.id}
                   className="relative min-w-0 flex-shrink"
-                  onMouseEnter={isEditing ? undefined : () => handleMouseEnter(index)}
-                  onMouseLeave={isEditing ? undefined : handleMouseLeave}
+                  onMouseEnter={rolloverEnabled ? () => handleMouseEnter(index) : undefined}
+                  onMouseLeave={rolloverEnabled ? handleMouseLeave : undefined}
                 >
                   <button
                     id={item.id}
                     type="button"
-                    aria-expanded={openIndex === index}
+                    aria-expanded={rolloverEnabled && openIndex === index}
                     aria-haspopup="true"
                     aria-controls={item.panelId}
                     className={cn(
                       'nav-item nav-item__header menu-button flex h-full min-w-0 cursor-pointer items-center justify-center border-0 bg-transparent px-3 py-4 text-center text-white hover:bg-[var(--color-primary-hover)] focus:outline focus:ring-2 focus:ring-inset focus:ring-white',
-                      openIndex === index && 'bg-[var(--color-primary-hover)]'
+                      openIndex === index && rolloverEnabled && 'bg-[var(--color-primary-hover)]'
                     )}
                     onClick={() => {
-                      if (isEditing) return;
+                      if (!rolloverEnabled) return;
                       setOpenIndex(openIndex === index ? null : index);
                     }}
                   >
@@ -663,9 +641,13 @@ export function Default({ params, page }: AndrewHeaderContentProps): React.React
             ))}
           </ul>
         </nav>
-        {/* Full-width dropdown rendered at container level so it spans entire width */}
-        {openItem && (
-          <div className="absolute left-0 right-0 top-full z-40 -mx-4">
+        {/* Full-width dropdown: only show when not in Page Builder (editing); appears above site content via z-index */}
+        {openItem && rolloverEnabled && (
+          <div
+            className="absolute left-0 right-0 top-full z-[110] -mx-4"
+            onMouseEnter={cancelCloseTimer}
+            onMouseLeave={closePanel}
+          >
             <NavDropdownPanel item={openItem} isOpen />
           </div>
         )}
