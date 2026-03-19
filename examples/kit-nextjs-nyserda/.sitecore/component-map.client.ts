@@ -3,6 +3,7 @@
 import { BYOCClientWrapper, NextjsContentSdkComponent, FEaaSClientWrapper } from '@sitecore-content-sdk/nextjs';
 import { Form } from '@sitecore-content-sdk/nextjs';
 
+import * as CleanEnergyBanner from 'src/components/page-content/CleanEnergyBanner';
 import * as AndrewHeaderContent from 'src/components/page-content/AndrewHeaderContent';
 import * as Navigation from 'src/components/navigation/Navigation';
 import * as HomeCTA from 'src/components/home-cta/HomeCTA';
@@ -14,6 +15,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['BYOCWrapper', BYOCClientWrapper],
   ['FEaaSWrapper', FEaaSClientWrapper],
   ['Form', Form],
+  ['CleanEnergyBanner', { ...CleanEnergyBanner }],
   ['AndrewHeaderContent', { ...AndrewHeaderContent }],
   ['Navigation', { ...Navigation }],
   ['HomeCTA', { ...HomeCTA }],

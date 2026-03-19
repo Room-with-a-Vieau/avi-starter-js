@@ -1,0 +1,74 @@
+/* Clean Energy Banner – full-width image with blue text overlay on left half */
+
+.clean-energy-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Background image fills section and sets height */
+.clean-energy-banner__bg {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.clean-energy-banner__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  vertical-align: middle;
+  min-height: 280px;
+}
+
+@media (min-width: 768px) {
+  .clean-energy-banner__img {
+    min-height: 360px;
+  }
+}
+
+@media (min-width: 992px) {
+  .clean-energy-banner__img {
+    min-height: 400px;
+  }
+}
+
+/* Blue box fits text; overlaid on image, centered vertically */
+.clean-energy-banner__overlay {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  margin: 0;
+  padding: 1rem 1.25rem;
+  background-color: rgba(0, 107, 166, 0.85);
+  color: #fff;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .clean-energy-banner__overlay {
+    left: 2rem;
+    max-width: calc(100% - 4rem);
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .clean-energy-banner__overlay {
+    left: 2.5rem;
+    padding: 1.5rem 2rem;
+  }
+}
+
+.clean-energy-banner__title {
+  color: #fff;
+}
+
+.clean-energy-banner__subtitle {
+  color: #fff;
+}
