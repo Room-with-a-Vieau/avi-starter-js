@@ -32,7 +32,7 @@ const STATIC_SLIDES: StaticCarouselSlide[] = [
     imageSrc:
       'https://xmc-salesengine3c66-aviny0cdd-dev5e4f.sitecorecloud.io/-/jssmedia/Project/examples/new-york/banner01.png?h=536&iar=0&w=1002&ttc=63909112282&tt=2E8A6C3F0D3A3A75B450448F852D8699&hash=DF14F6A69FB40A9EBE561B356188A5A3',
     imageAlt: 'Working for an Affordable, Sustainable, and Innovative Energy Future',
-    linkHref: '#',
+    linkHref: 'About-NYSERDA',
     linkText: 'Learn more',
   },
   {
@@ -40,7 +40,7 @@ const STATIC_SLIDES: StaticCarouselSlide[] = [
     imageSrc:
       'https://xmc-salesengine3c66-aviny0cdd-dev5e4f.sitecorecloud.io/-/jssmedia/Project/examples/new-york/banner02.png?h=536&iar=0&w=1002&ttc=63909112983&tt=515B8E3FF554722B2A064E7147A67C8C&hash=104C0B06BD81F6ECDF4F97C565830CFF',
     imageAlt: 'Building Our Clean Energy Future Today',
-    linkHref: '#',
+    linkHref: 'About-NYSERDA',
     linkText: 'Learn more',
   },
   {
@@ -48,7 +48,7 @@ const STATIC_SLIDES: StaticCarouselSlide[] = [
     imageSrc:
       'https://xmc-salesengine3c66-aviny0cdd-dev5e4f.sitecorecloud.io/-/jssmedia/Project/examples/new-york/banner03.png?h=536&iar=0&w=1002&ttc=63909112362&tt=4E9728EF512BD9584A0BD4090AA0D191&hash=C99857D85600C074131E53966EFBDC31',
     imageAlt: 'Congestion Mitigation and Air Quality Improvement (CMAQ) Program',
-    linkHref: '#',
+    linkHref: 'About-NYSERDA',
     linkText: 'Learn more',
   },
 ];
